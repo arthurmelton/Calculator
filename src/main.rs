@@ -31,9 +31,9 @@ pub enum Message {
 fn main() {
     let app = app::App::default();
     let mut wind = Window::default()
-        .with_size(400,600)
+        .with_size(400,675)
         .with_label("Calculator");
-    //wind.make_resizable(true);
+    wind.make_resizable(true);
     wind.set_color(Color::Black);
     
     let mut frame = Frame::new(375, 50, 350, 75, "0").with_align(Align::Left);
@@ -311,8 +311,8 @@ fn number_to_string(number:String) -> String {
             index +=1;
             number_f64 *= 0.1;
         }
-        if &number_f64.to_string() == "10" {
-            [&"1.0000000000".to_string()[0..(9 - index.to_string().chars().count())], "e", (index+1).to_string().as_str()].join("")
+        if &number_f64.to_string().chars().count() < &(10 as usize) {
+            [number_f64.to_string().as_str(), &"000000000000".to_string()[0..(9 - index.to_string().chars().count()) - number_f64.to_string().chars().count()], "e", (index+1).to_string().as_str()].join("")
         }
         else {
             [&number_f64.to_string()[0..(9 - index.to_string().chars().count())], "e", index.to_string().as_str()].join("")
