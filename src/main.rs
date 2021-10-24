@@ -33,7 +33,7 @@ fn main() {
     let mut wind = Window::default()
         .with_size(400,675)
         .with_label("Calculator");
-    wind.make_resizable(true);
+    //wind.make_resizable(true);
     wind.set_color(Color::Black);
     
     let mut frame = Frame::new(375, 50, 350, 75, "0").with_align(Align::Left);
@@ -310,6 +310,10 @@ fn number_to_string(number:String) -> String {
         while number_f64 > 10.0 || number_f64 < -10.0  {
             index +=1;
             number_f64 *= 0.1;
+        }
+        while number_f64 < 1.0 && number_f64 > -1.0 {
+            index -=1;
+            number_f64 *= 10.0;
         }
         if &number_f64.to_string().chars().count() < &(10 as usize) {
             [number_f64.to_string().as_str(), &"000000000000".to_string()[0..(9 - index.to_string().chars().count()) - number_f64.to_string().chars().count()], "e", (index+1).to_string().as_str()].join("")
